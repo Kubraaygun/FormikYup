@@ -1,7 +1,7 @@
-import {ScrollView, StyleSheet, Text, View} from 'react-native';
+import {Alert, ScrollView, StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {Formik} from 'formik';
-import {Input, Button} from '@ui-kitten/components';
+import {Input, Button, Toggle, Tooltip} from '@ui-kitten/components';
 import * as Yup from 'yup';
 
 const FormikYup = () => {
@@ -24,6 +24,9 @@ const FormikYup = () => {
     passwordConfirm: Yup.string()
       .required('Zorunlu Alan')
       .oneOf([Yup.ref('password')], 'Şifreler uyuşmuyor'),
+    agrementConfirm: Yup.bool()
+      .required('Zorunlu Alan')
+      .oneOf([true], 'Sözleşmeyi onaylamanız gerekiyor.'),
   });
 
   return (
@@ -51,9 +54,12 @@ const FormikYup = () => {
               phone: '',
               password: '',
               passwordConfirm: '',
+              agrementConfirm: false,
             }}
             validationSchema={registerSchema}
-            onSubmit={values => console.log(values)}>
+            onSubmit={values =>
+              Alert.alert('Form Değerleri', JSON.stringify(values, null, 2))
+            }>
             {({handleChange, handleSubmit, values, setFieldValue, errors}) => (
               <View>
                 <Input
@@ -119,6 +125,18 @@ const FormikYup = () => {
                   status={errors.passwordConfirm ? 'danger' : 'basic'}
                   caption={errors.passwordConfirm}
                 />
+
+                <View>
+                  <Toggle
+                    checked={values.agrementConfirm}
+                    onChange={value => setFieldValue('agrementConfirm', value)}>
+                    Kullanıcı Sözleşmesini ve Gizlilik Anlaşmasını kabul
+                    ediyorum.
+                  </Toggle>
+                  {errors.agrementConfirm && (
+                    <Text style={{color: 'red'}}>{errors.agrementConfirm}</Text>
+                  )}
+                </View>
 
                 <Button
                   style={{marginTop: 30}}
