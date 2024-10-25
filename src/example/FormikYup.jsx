@@ -11,9 +11,19 @@ const FormikYup = () => {
     email: Yup.string()
       .required('Zorunlu Alan')
       .email('Lütfen geçerli bir email adresi giriniz.!!'),
-    phone: Yup.number().required('Zorunlu Alan'),
-    password: Yup.string().required('Zorunlu Alan'),
-    passwordConfirm: Yup.string().required('Zorunlu Alan'),
+    phone: Yup.string()
+      .required('Zorunlu Alan')
+      .min(11, 'Lütfen minimum 11 hane giriniz!!')
+      .max(13, 'Lütfen minimum 13 hane giriniz!!'),
+    password: Yup.string()
+      .required('Zorunlu Alan')
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,50}$/,
+        'Şartlar sağlanmıyor!!!!',
+      ),
+    passwordConfirm: Yup.string()
+      .required('Zorunlu Alan')
+      .oneOf([Yup.ref('password')], 'Şifreler uyuşmuyor'),
   });
 
   return (
