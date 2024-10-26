@@ -18,5 +18,4 @@ Bu projede kullanıcıdan isim, soyisim, e-posta, telefon, şifre ve sözleşme 
 
 ## Ekran Görüntüsü
 
-![](./assets/FormikYupG.gif)
-![](./assets/formik3.png)
+![](./assets/FormikYup-F.gif)
