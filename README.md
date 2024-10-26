@@ -17,3 +17,5 @@ Bu projede kullanıcıdan isim, soyisim, e-posta, telefon, şifre ve sözleşme 
 - UI Kitten
 
 ## Ekran Görüntüsü
+
+![](./assets/formik.png)
